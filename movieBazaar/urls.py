@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from movie_bazaar_app.views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('homepage/', HomeView.as_view(), name='home_page')
+
 ]

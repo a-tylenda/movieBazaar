@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+
+        {% block title %}
+            <title>Homepage</title>
+        {% endblock %}
+
+    </head>
+    <body>
+        {% block header %}{% endblock %}
+        {% block content %}
+            {% for movie in movies %}
+                <div class="card">
+                  <div class="card-body">
+                      <img src="/media/{{ movie.poster }}" class="movie-poster">
+                      <div class="row">
+                          <div class="col-9">
+                            <h5 class="card-title">{{ movie }}</h5>
+                          </div>
+                      </div>
+
+
+                      <div class="row">
+                          <p class="card-text description">{{ movie.description }}</p>
+                      </div>
+                  </div>
+                </div>
+                <br>
+            {% endfor %}
+        {% endblock %}
+
+        <footer id="push">
+            © Copyright 2020 by <a href="homepage.html">movieBazaar</a>
+        </footer>
+    </body>
+</html>

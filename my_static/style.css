@@ -1,0 +1,20 @@
+body {
+    padding: 2rem;
+}
+
+.movie-poster {
+    width: 150px;
+    float: left;
+}
+
+.movie-icon {
+    font-size: 1.6rem;
+}
+
+.description {
+    margin-left: 18px;
+}
+
+.card {
+    width: 36rem;
+}

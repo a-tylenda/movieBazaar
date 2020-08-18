@@ -7,7 +7,7 @@
 __pycache__/
 local_settings.py
 db.sqlite3
-media
+my_media
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
