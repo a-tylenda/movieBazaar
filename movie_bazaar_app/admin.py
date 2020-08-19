@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Movie, Person, PersonMovie, Rate, AdditionalInfo
+from .models import Movie, Actor, ActorMovie, MovieRating, ActorRating
 
 admin.site.register(Movie)
-admin.site.register(Person)
-admin.site.register(PersonMovie)
-admin.site.register(Rate)
-admin.site.register(AdditionalInfo)
+admin.site.register(Actor)
+admin.site.register(ActorMovie)
+admin.site.register(MovieRating)
+admin.site.register(ActorRating)
+
 
 

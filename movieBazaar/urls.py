@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from movie_bazaar_app.views import HomeView
+from django.conf.urls.static import static
+from django.conf import settings
+# from movie_bazaar_app.views import HomeView, MovieDatailsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('homepage/', HomeView.as_view(), name='home_page')
+    # path('', HomeView.as_view(), name='homepage'),
+    # path('movie-details/<int:movie_id>/', MovieDatailsView.as_view(), name='movie-details'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
