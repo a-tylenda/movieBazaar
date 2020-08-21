@@ -1,43 +1,63 @@
-{#{% load static %}#}
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#    <head>#}
-{#        <meta charset="UTF-8">#}
-{#        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">#}
-{#        <link rel="stylesheet" href="{% static 'style.css' %}">#}
-{##}
-{#        {% block title %}#}
-{#            <title>Homepage</title>#}
-{#        {% endblock %}#}
-{##}
-{#    </head>#}
-{#    <body>#}
-{#        {% block header %}{% endblock %}#}
-{#        {% block content %}#}
-{#            {% for movie in movies %}#}
-{#                <div class="card">#}
-{#                  <div class="card-body">#}
-{#                      <img src="/media/{{ movie.poster }}" class="movie-poster">#}
-{#                      <div class="row">#}
-{#                          <div class="col-9">#}
-{#                            <h3>#}
-{#                                <a href="/movie-details/{{ movie.id }}" class="card-title">{{ movie.title }}</a>#}
-{#                            </h3>#}
-{#                          </div>#}
-{#                      </div>#}
-{##}
-{##}
-{#                      <div class="row">#}
-{#                          <p class="card-text description">{{ movie.description }}</p>#}
-{#                      </div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <br>#}
-{#            {% endfor %}#}
-{#        {% endblock %}#}
-{##}
-{#        <div style="float: bottom" >#}
-{#            © Copyright 2020 by <a href="homepage.html">movieBazaar</a>#}
-{#        </div>#}
-{#    </body>#}
-{#</html>#}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ewert&display=swap">
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+        {% block title %}
+            <title>Homepage</title>
+        {% endblock %}
+
+    </head>
+
+    <body>
+        <div class="jumbotron jumbo">
+        <center>
+            {% if user.is_authenticated %}
+                <p class="subtitle">{{ user.username }} welcome to </p>
+                <p class="title" style="margin-top: 0px; margin-bottom: 0px">MovieBzaar</p>
+                <p class="button"><a href="{% url 'logout' %}" class="btn btn-primary button">Logout</a></p>
+
+            {% else %}
+                <p class="subtitle">{{ user.username }} welcome to </p>
+                <p class="title" style="margin-top: 0px; margin-bottom: 0px">MovieBzaar</p>
+                <p class="button"><a href="{% url 'login' %}" class="btn btn-primary button">Login</a></p>
+            {% endif %}
+        </center>
+        </div>
+        {% block header %}{% endblock %}
+        {% block content %}
+            {% for movie in movies %}
+                <div class="card">
+                  <div class="card-body">
+                      <img src="/media/{{ movie.poster }}" class="movie-poster">
+                      <div class="row">
+                          <div class="col-9">
+                            <h3>
+                                <a href="/movie-details/{{ movie.id }}" class="card-title">{{ movie.title }}
+                                <p style="font-size: 20px">({{ movie.year }})</p></a>
+                            </h3>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <p class="card-text description">{{ movie.description }}</p>
+                      </div>
+                  </div>
+                </div>
+                <br>
+            {% endfor %}
+        {% endblock %}
+
+        <div class="footer">
+          <p style="float: right">
+              <a href="{% url 'homepage' %}">Strona głowna</a> |
+              <a href="{% url 'homepage' %}"> O nas </a> |
+              <a href="{% url 'homepage' %}">Kontakt</a>
+          </p>
+        </div>
+    </body>
+</html>

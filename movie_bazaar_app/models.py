@@ -26,9 +26,20 @@ class Movie(models.Model):
     title = models.CharField(max_length=250)
     actors = models.ManyToManyField("Actor", through="ActorMovie")
     genre = models.IntegerField(choices=GENRE, null=True)
+    poster = models.ImageField(upload_to="posters", null=True, blank=True)
+    year = models.IntegerField(null=True)
+    description = models.TextField(default="")
 
     def __str__(self):
         return f"{self.title}"
+
+# aby wyświetlis listę filmów Leonarda:
+# movie =  Movie.objects.filter(actors__name="Leonardo DiCaprio")
+# print(movie)
+# lub
+# actor = Actor.objects.get(name="Leonardo DiCaprio")
+# movies = actor.movie_set.all()
+# print(movies)
 
 
 class Actor(models.Model):
@@ -52,8 +63,14 @@ class MovieRating(models.Model):
     rate = models.IntegerField(choices=RATE)
     review = models.TextField(default="", blank=True)
 
+    def __str__(self):
+        return f"{self.movie.title} {self.get_rate_display()}"
+
 
 class ActorRating(models.Model):
     actor = models.ForeignKey("Actor", on_delete=models.CASCADE, null=True)
     rate = models.IntegerField(choices=RATE)
     review = models.TextField(default="", blank=True)
+
+    def __str__(self):
+        return f"{self.actor.name} {self.get_rate_display()}"

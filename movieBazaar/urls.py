@@ -17,11 +17,17 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-# from movie_bazaar_app.views import HomeView, MovieDatailsView
+from django.contrib.auth import views as auth_views
+from movie_bazaar_app.views import HomeView, MovieDatailsView, NewMovieView, EditMovieView, DeleteMovieView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', HomeView.as_view(), name='homepage'),
-    # path('movie-details/<int:movie_id>/', MovieDatailsView.as_view(), name='movie-details'),
+    path('login/', auth_views.LoginView.as_view(), name='login'), # html jest w templates/registration (zgodnie z dokumentacją dj)
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('', HomeView.as_view(), name='homepage'),
+    path('movie-details/<int:movie_id>/', MovieDatailsView.as_view(), name='movie-details'),
+    path('new-movie/', NewMovieView.as_view(), name='new-movie'),
+    path('edit-movie/<int:movie_id>/', EditMovieView.as_view(), name='edit-movie'),
+    path('delete-movie/<int:movie_id>/', DeleteMovieView.as_view(), name='delete-movie'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

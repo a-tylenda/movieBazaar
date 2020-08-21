@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuń {{ movie.title }}</title>
+</head>
+<body>
+    <h1> Czy na pewno chcesz usunąć film "{{ movie.title }}"?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Potwierdź</button>
+        <button type="button"><a href="{% url 'movie-details' movie.id %}">Cofnij</a></button>
+    </form>
+</body>
+</html>

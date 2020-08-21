@@ -16,5 +16,33 @@ body {
 }
 
 .card {
-    width: 36rem;
+    width: 26rem;
+}
+
+.footer {
+    position: fixed;
+    padding: 10px 10px 10px;
+    bottom: 0;
+    width: 95.5%;
+    height: 40px;
+    background: pink;
+    float: right;
+}
+
+.jumbo {
+    padding: 10px 10px 10px 10px;
+}
+.title {
+    font-family: 'Ewert', cursive;
+    font-size: 120px;
+    margin: 2px;
+}
+.subtitle{
+    font-family: 'Great Vibes', cursive;
+    font-size: 80px;
+
+}
+.button {
+    position:absolute; top:0; right:0;
+    padding: 2rem;
 }

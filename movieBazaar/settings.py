@@ -130,3 +130,8 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'my_media'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'homepage'  # przekieruje mnie na homepage po zalogowaniu
+
+LOGOUT_REDIRECT_URL = 'login'

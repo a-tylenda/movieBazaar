@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nowy Film</title>
+</head>
+    <body>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Zapisz film</button>
+            <button type="button"><a href="{% url 'movie-details' movie.id %}">Cofnij</a></button>
+        </form>
+
+    </body>
+</html>
