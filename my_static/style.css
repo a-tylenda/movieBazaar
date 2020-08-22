@@ -1,5 +1,8 @@
 body {
     padding: 2rem;
+    font:small sans-serif;
+    background:#eee;
+    color:#000;
 }
 
 .movie-poster {
@@ -25,23 +28,25 @@ body {
     bottom: 0;
     width: 95.5%;
     height: 40px;
-    background: pink;
-    float: right;
+    background: #eee;
+    color: #000;
 }
 
 .jumbo {
     padding: 10px 10px 10px 10px;
 }
+
 .title {
     font-family: 'Ewert', cursive;
     font-size: 120px;
     margin: 2px;
 }
+
 .subtitle{
     font-family: 'Great Vibes', cursive;
     font-size: 80px;
-
 }
+
 .button {
     position:absolute; top:0; right:0;
     padding: 2rem;

@@ -13,12 +13,17 @@ GENRE = {
 }
 
 RATE = (
-    (0, "☆☆☆☆☆"),
-    (1, "★☆☆☆☆"),
-    (2, "★★☆☆☆"),
-    (3, "★★★☆☆"),
-    (4, "★★★★☆"),
-    (5, "★★★★★"),
+    (0, "☆☆☆☆☆☆☆☆☆☆"),
+    (1, "★☆☆☆☆☆☆☆☆☆"),
+    (2, "★★☆☆☆☆☆☆☆☆"),
+    (3, "★★★☆☆☆☆☆☆☆"),
+    (4, "★★★★☆☆☆☆☆☆"),
+    (5, "★★★★★☆☆☆☆☆"),
+    (6, "★★★★★★☆☆☆☆"),
+    (7, "★★★★★★★☆☆☆"),
+    (8, "★★★★★★★★☆☆"),
+    (9, "★★★★★★★★★☆"),
+    (10,"★★★★★★★★★★"),
 )
 
 
@@ -32,6 +37,15 @@ class Movie(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+
+class MovieRating(models.Model):
+    movie = models.ForeignKey("Movie", on_delete=models.CASCADE, null=True)
+    rate = models.IntegerField(choices=RATE)
+    review = models.TextField(default="", blank=True)
+
+    def __str__(self):
+        return f"{self.get_rate_display()}"
 
 # aby wyświetlis listę filmów Leonarda:
 # movie =  Movie.objects.filter(actors__name="Leonardo DiCaprio")
@@ -56,15 +70,6 @@ class ActorMovie(models.Model):
 
     def __str__(self):
         return f"{self.movie.title}"
-
-
-class MovieRating(models.Model):
-    movie = models.ForeignKey("Movie", on_delete=models.CASCADE, null=True)
-    rate = models.IntegerField(choices=RATE)
-    review = models.TextField(default="", blank=True)
-
-    def __str__(self):
-        return f"{self.movie.title} {self.get_rate_display()}"
 
 
 class ActorRating(models.Model):

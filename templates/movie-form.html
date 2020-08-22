@@ -5,13 +5,16 @@
     <title>Nowy Film</title>
 </head>
     <body>
-
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form }}
-            <button type="submit">Zapisz film</button>
-            <button type="button"><a href="{% url 'movie-details' movie.id %}">Cofnij</a></button>
-        </form>
-
+        <div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                    {% if new %}
+                        <button type="submit">Dodaj film</button>
+                    {% else %}
+                        <button type="submit">Zapisz</button>
+                    {% endif %}
+            </form>
+        </div>
     </body>
 </html>
