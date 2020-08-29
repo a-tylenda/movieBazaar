@@ -1,0 +1,30 @@
+{% extends "homepage.html" %}
+{% load bootstrap %}
+
+{% block title %}
+    <title>Szukaj Filmu</title>
+{% endblock %}
+
+{% block content %}
+<p>
+    Szukaj:
+    <form method="get">
+        {{ form|bootstrap }}
+        <input type="submit" value="Szukaj">
+    </form>
+</p>
+
+{% if movies is not None %}
+    <p>
+        Wyniki wyszukiwania:
+        <ol>
+            {% for movie in movies %}
+                <li>{{ movie.title }} ({{ movie.year }}) </li>
+            {% empty %}
+                Brak wyniku wyszukiwania.
+            {% endfor %}
+        </ol>
+    </p>
+{% endif %}
+
+{% endblock %}

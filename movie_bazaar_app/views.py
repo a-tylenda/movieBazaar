@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView, FormView, CreateView, DeleteView
 from .models import Movie, ActorMovie, MovieRating
-from .forms import MovieForm, MovieRateForm
+from .forms import MovieForm, MovieRateForm, MovieSearchForm
 from django.db.models import Avg
 
 
@@ -13,6 +14,24 @@ class HomeView(View):
             'movies': movies
         }
         return render(request, 'homepage.html', ctx)
+
+
+class MovieSearch(TemplateView):
+    template_name = 'movie-search.html'
+
+    def get_context_data(self, **kwargs):
+        if self.request.GET:
+            form = MovieSearchForm(self.request.GET)
+            if form.is_valid():
+                movies = Movie.objects.filter(title__icontains=form.cleaned_data['title'])
+            else:
+                movies = []
+        else:
+            form = MovieSearchForm()
+            movies = None
+        ctx = {"form": form,
+               "movies": movies}
+        return ctx
 
 
 class MovieDatailsView(View):

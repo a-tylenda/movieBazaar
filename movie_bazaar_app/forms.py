@@ -1,14 +1,20 @@
-from django.forms import ModelForm
+from django import forms
 from .models import Movie, MovieRating
 
 
-class MovieForm(ModelForm):
+class MovieSearchForm(forms.ModelForm):
+    class Meta:
+        model = Movie
+        fields = ['title']
+
+
+class MovieForm(forms.ModelForm):
     class Meta:
         model = Movie
         fields = ['title', 'description', 'year', 'poster', 'actors', 'genre']
 
 
-class MovieRateForm(ModelForm):
+class MovieRateForm(forms.ModelForm):
     class Meta:
         model = MovieRating
         fields = ['rate', 'review']

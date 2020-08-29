@@ -31,9 +31,19 @@
         </div>
         {% block header %}
             <button type="button"><a href="{% url "new-movie"%}"> Dodaj film </a></button>
+            <button type="button"><a href="{% url "movie-search"%}"> Szukaj filmu </a></button>
         {% endblock %}
         <br><br>
+{#        <p>#}
+{#            Szukaj:#}
+{#            <form method="get">#}
+{#                {{ form }}#}
+{#                <input type="submit" value="Szukaj">#}
+{#            </form>#}
+{#        </p>#}
+        <br><br>
         {% block content %}
+
             {% for movie in movies %}
                 <div class="card">
                   <div class="card-body">
@@ -44,6 +54,7 @@
                                 <a href="/movie-details/{{ movie.id }}" class="card-title">{{ movie.title }}
                                 <p style="font-size: 20px">({{ movie.year }})</p></a>
                             </h3>
+                              <p>Średnia ocena: {{ movie.rate }}</p>
                           </div>
                       </div>
                       <div class="row">

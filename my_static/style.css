@@ -1,5 +1,5 @@
 body {
-    padding: 2rem;
+    padding: 4rem;
     font:small sans-serif;
     background:#eee;
     color:#000;
@@ -40,6 +40,7 @@ body {
     font-family: 'Ewert', cursive;
     font-size: 120px;
     margin: 2px;
+    color: tomato;
 }
 
 .subtitle{

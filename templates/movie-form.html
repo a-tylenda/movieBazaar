@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends "homepage.html" %}
+{% load bootstrap %}
+
+{% block title %}
     <title>Nowy Film</title>
-</head>
-    <body>
+{% endblock %}
+
+{% block content %}
         <div>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form }}
+                {{ form|bootstrap }}
                     {% if new %}
                         <button type="submit">Dodaj film</button>
                     {% else %}
@@ -16,5 +17,4 @@
                     {% endif %}
             </form>
         </div>
-    </body>
-</html>
+{% endblock %}

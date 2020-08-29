@@ -18,13 +18,14 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_views
-from movie_bazaar_app.views import HomeView, MovieDatailsView, NewMovieView, EditMovieView, DeleteMovieView
+from movie_bazaar_app.views import HomeView, MovieDatailsView, NewMovieView, EditMovieView, DeleteMovieView, MovieSearch
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(), name='login'), # html jest w templates/registration (zgodnie z dokumentacją dj)
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('', HomeView.as_view(), name='homepage'),
+    path('movie-search', MovieSearch.as_view(), name='movie-search'),
     path('movie-details/<int:movie_id>/', MovieDatailsView.as_view(), name='movie-details'),
     path('new-movie/', NewMovieView.as_view(), name='new-movie'),
     path('edit-movie/<int:movie_id>/', EditMovieView.as_view(), name='edit-movie'),
