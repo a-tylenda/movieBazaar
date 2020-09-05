@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load bootstrap %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +8,7 @@
 <body>
     <form method="post">
         {% csrf_token %}
-        {{ form }}  {#to jest wbudowany form, nie musimy tworzyć oddzielnego#}
+        {{ form|bootstrap }}  {#to jest wbudowany form, nie musimy tworzyć oddzielnego#}
         <button type="submit">Login</button>
     </form>
 </body>

@@ -47,14 +47,6 @@ class MovieRating(models.Model):
     def __str__(self):
         return f"{self.get_rate_display()}"
 
-# aby wyświetlis listę filmów Leonarda:
-# movie =  Movie.objects.filter(actors__name="Leonardo DiCaprio")
-# print(movie)
-# lub
-# actor = Actor.objects.get(name="Leonardo DiCaprio")
-# movies = actor.movie_set.all()
-# print(movies)
-
 
 class Actor(models.Model):
     name = models.CharField(max_length=120)
@@ -79,3 +71,5 @@ class ActorRating(models.Model):
 
     def __str__(self):
         return f"{self.actor.name} {self.get_rate_display()}"
+
+

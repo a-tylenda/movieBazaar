@@ -18,7 +18,8 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_views
-from movie_bazaar_app.views import HomeView, MovieDatailsView, NewMovieView, EditMovieView, DeleteMovieView, MovieSearch
+from movie_bazaar_app.views import HomeView, MovieDatailsView, NewMovieView, EditMovieView, DeleteMovieView, \
+    MovieSearch, NewActorView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('movie-search', MovieSearch.as_view(), name='movie-search'),
     path('movie-details/<int:movie_id>/', MovieDatailsView.as_view(), name='movie-details'),
     path('new-movie/', NewMovieView.as_view(), name='new-movie'),
+    path('new-actor/', NewActorView.as_view(), name='new-actor'),
     path('edit-movie/<int:movie_id>/', EditMovieView.as_view(), name='edit-movie'),
     path('delete-movie/<int:movie_id>/', DeleteMovieView.as_view(), name='delete-movie'),
 

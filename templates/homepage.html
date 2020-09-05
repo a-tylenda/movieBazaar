@@ -3,75 +3,88 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ewert&display=swap">
-        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 
         {% block title %}
             <title>Homepage</title>
         {% endblock %}
-
     </head>
-
-    <body>
-        <div class="jumbotron jumbo">
-        <center>
+       
+    {% block header %}
+        <header>
             {% if user.is_authenticated %}
-                <p class="subtitle">{{ user.username }} witaj w </p>
-                <p class="title">MovieBzaar</p>
-                <p class="button"><a href="{% url 'logout' %}" class="btn btn-primary">Logout</a></p>
-
+                <div class="left-area">
+                    <h3>{{ user.username|title }} witaj w <span>moviebzaare</span>
+                        <p>bazar pełen filmów</p>
+                    </h3>
+                </div>
+                <div class="right-area">
+                    <a href="{% url 'logout' %}" class="logout_btn">Logout</a>
+                </div>
             {% else %}
-                <p class="subtitle">{{ user.username }} welcome to </p>
-                <p class="title">MovieBzaar</p>
-                <p class="button"><a href="{% url 'login' %}" class="btn btn-primary">Login</a></p>
+                <div class="left-area">
+                    <h3>witaj w <span>moviebzaare</span></h3>
+                </div>
+                <div class="right-area">
+                    <a href="{% url 'login' %}" class="logout_btn">Login</a>
+                </div>
             {% endif %}
-        </center>
-        </div>
-        {% block header %}
-            <button type="button"><a href="{% url "new-movie"%}"> Dodaj film </a></button>
-            <button type="button"><a href="{% url "movie-search"%}"> Szukaj filmu </a></button>
+        </header>
+        
         {% endblock %}
-        <br><br>
-{#        <p>#}
-{#            Szukaj:#}
-{#            <form method="get">#}
-{#                {{ form }}#}
-{#                <input type="submit" value="Szukaj">#}
-{#            </form>#}
-{#        </p>#}
-        <br><br>
-        {% block content %}
+        <!--sidebar start-->
+        <div class="sidebar">
+            <center>
+                <img src="avatar.jpeg" class="profile_image" alt="">
+                <h4>{{ user.username|title }}</h4>
+            </center>
+            <a href="{% url 'homepage' %}"><i class="fas fa-home"></i><span> Strona główna </span></a>
+            <a href="#"><i class="fas fa-film"></i><span> Wszystkie filmy </span></a>
+            <a href="{% url 'movie-search'%}"><i class="fas fa-search"></i><span> Szukaj Filmu </span></a>
+            <a href="{% url 'new-movie'%}"><i class="fas fa-plus"></i><span> Dodaj nowy film </span></a>
+            <a href="{% url 'new-actor'%}"><i class="fas fa-plus"></i><span> Dodaj aktora </span></a>
+            <a href="#"><i class="fas fa-users"></i><span> O nas </span></a>
+            <a href="#"><i class="fas fa-address-book"></i><span> Kontakt </span></a>
+        </div>
+        <!--sidebar end-->
+        
+   
+    <body style="background: #0c7c9b;"> 
+    {% block content %}
 
-            {% for movie in movies %}
-                <div class="card">
-                  <div class="card-body">
-                      <img src="/media/{{ movie.poster }}" class="movie-poster">
-                      <div class="row">
-                          <div class="col-9">
+        {% for movie in movies %}
+                <div class="card content">
+                    <div class="card-body">
+                        <img src="/media/{{ movie.poster }}" class="movie-poster">
+                        <div class="row">
+                            <div class="col-9">
                             <h3>
                                 <a href="/movie-details/{{ movie.id }}" class="card-title">{{ movie.title }}
                                 <p style="font-size: 20px">({{ movie.year }})</p></a>
+
                             </h3>
-                              <p>Średnia ocena: {{ movie.rate }}</p>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <p class="card-text description">{{ movie.description }}</p>
-                      </div>
-                  </div>
+                                <p>Średnia ocena:
+                                    <h4>{{ avrg|floatformat }}</h4>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="card-text description">{{ movie.description }}</p>
+                        </div>
+                    </div>
                 </div>
                 <br>
-            {% endfor %}
-        {% endblock %}
+        {% endfor %}
+    {% endblock %}
 
-        <div class="footer">
-        <center>
-          <a href="{% url 'homepage' %}">Strona głowna</a> |
-          <a href="{% url 'homepage' %}"> O nas </a> |
-          <a href="{% url 'homepage' %}">Kontakt</a>
-        </center>
-        </div>
+    <div class="footer">
+    
+        <p>© Copyright 2020 by <span>MovieBzaare</span></p>
+    
+    </div>    
     </body>
-</html>
+</html> 

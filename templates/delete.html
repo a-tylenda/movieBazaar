@@ -6,10 +6,12 @@
 {% endblock %}
 
 {% block content %}
+<div class="content">
     <h1> Czy na pewno chcesz usunąć film "{{ movie.title }}"?</h1>
     <form method="post">
         {% csrf_token %}
         <button type="submit">Potwierdź</button>
         <button type="button"><a href="{% url 'movie-details' movie.id %}">Cofnij</a></button>
     </form>
+</div>
 {% endblock %}

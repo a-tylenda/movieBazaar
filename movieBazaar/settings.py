@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'bootstrapform',
     'movie_bazaar_app',
 ]
@@ -134,4 +135,4 @@ MEDIA_ROOT = 'my_media'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'homepage'  # przekieruje mnie na homepage po zalogowaniu
 
-LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = 'homepage'

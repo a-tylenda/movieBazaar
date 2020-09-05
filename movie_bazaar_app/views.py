@@ -3,15 +3,21 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, FormView, CreateView, DeleteView
 from .models import Movie, ActorMovie, MovieRating
-from .forms import MovieForm, MovieRateForm, MovieSearchForm
+from .forms import MovieForm, MovieRateForm, MovieSearchForm, ActorForm
 from django.db.models import Avg
 
 
 class HomeView(View):
     def get(self, request):
-        movies = Movie.objects.all()
+        movies = Movie.objects.order_by('title')
+        for movie in movies:
+            ratings = MovieRating.objects.filter(movie_id=movie.id)
+            avrg = ratings.aggregate(Avg('rate'))['rate__avg']
+
         ctx = {
-            'movies': movies
+            'movies': movies,
+            'ratings': ratings,
+            'avrg': avrg
         }
         return render(request, 'homepage.html', ctx)
 
@@ -83,6 +89,26 @@ class NewMovieView(LoginRequiredMixin, View):
             return redirect('homepage')
 
         return render(request, "movie-form.html", ctx)
+
+
+class NewActorView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'new-actor'
+
+    def get(self, request):
+        form = ActorForm()
+        ctx = {"form": form}
+        return render(request, "actor-form.html", ctx)
+
+    def post(self, request):
+        form = ActorForm(request.POST or None, request.FILES or None)
+        ctx = {"form": form}
+
+        if form.is_valid():
+            form.save()
+            return redirect('homepage')
+
+        return render(request, "actor-form.html", ctx)
 
 
 class EditMovieView(LoginRequiredMixin, View):
